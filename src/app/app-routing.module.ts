@@ -1,29 +1,30 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule, PreloadAllModules} from '@angular/router';
+import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
+import { HomeIndexComponent } from './pages/home/home-index/home-index.component';
 
-const routes: Routes = [
+export const routes: Routes = [
+    // { path: '', component: HomeIndexComponent, pathMatch: 'full' },
     {
         path: 'home',
         loadChildren: './pages/home/home.module#HomeModule',
-        data: { title : '首页' }
+        data: { preload: true }
     },
     {
         path: 'loan',
         loadChildren: './pages/loan/loan.module#LoanModule',
-        data: { title : '借款' }
+        data: { preload: true },
     },
     {
         path: 'find',
         loadChildren: './pages/find/find.module#FindModule',
-        data: { title : '发现' }
+        data: { preload: true },
     }
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(
-        routes,
-        )
-    ],
+    imports: [],
+    declarations: [],
+    providers: [],
     exports: [RouterModule]
 })
 export class AppRoutingModule { }
