@@ -1,0 +1,9 @@
+<div class="form-cell-warning" *ngIf="showErrors">{{ showErrors }}</div>
+
+<form (ngSubmit)="onSubmit($event)" [formGroup]="form">
+    <input type="text" value='' style="display:none">
+    <input type="password" value='' style="display:none">
+    <div class="weui-cells weui-cells_form">
+        <yl-form-item *ngFor="let item of items" [item]="item" [form]="form"></yl-form-item>
+    </div>
+</form>

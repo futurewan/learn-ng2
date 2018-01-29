@@ -1,0 +1,171 @@
+<div class="rel" [formGroup]="form" #myForm [ngSwitch]="item.controlType">
+    <!--input-->
+    <ng-container *ngSwitchCase="'cInput'">
+        <yl-sibling *ngIf="item.beforeSib" class="before-sib-class" [source]="item.beforeSib"></yl-sibling>
+        <div class="weui-cell" [class.weui-cell-icon]="item.labelicon" [ngClass]="item.myClass">
+            <div class="weui-cell__hd" *ngIf="item.labelicon || item.label">
+                <label class="weui-label" [ngClass]="item.labelwidth">
+                    <i *ngIf="item.labelicon" [class]="item.labelicon"></i>
+                    <span *ngIf="item.label">{{item.label}}</span>
+                </label>
+            </div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" ylClearvalue [ylSubsection]="item.subsection" type="text" [id]="item.key" [formControlName]="item.key"
+                       [name]="item.key" [placeholder]="item.placeholder"
+                       [minlength]="item.minlength" [maxlength]="item.maxlength" [pattern]="item.pattern"
+                       [required]="item.required" [value]="item.value"
+                /><i class="sy-icon-sub-del" (click)="clearValue(item.key,$event)">X</i>
+            </div>
+            <div class="weui-cell__ft" *ngIf="item.unit">{{item.unit}}</div>
+            <!--单位 例：元-->
+        </div>
+        <yl-sibling *ngIf="item.sib" [source]="item.sib"></yl-sibling>
+    </ng-container>
+    <!--密码-->
+    <ng-container *ngSwitchCase="'cPassword'">
+        <div class="weui-cell" [class.weui-cell-icon]="item.labelicon">
+            <div class="weui-cell__hd">
+                <label class="weui-label" [ngClass]="item.labelwidth">
+                    <i *ngIf="item.labelicon" [class]="item.labelicon"></i>
+                    <span *ngIf="item.label">{{item.label}}</span>
+                </label>
+            </div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" ylClearvalue #toggleTypeOne type="password" [id]="item.key"
+                       [formControlName]="item.key" [name]="item.key"
+                       [placeholder]="item.placeholder" [minlength]="item.minlength" [maxlength]="item.maxlength"
+                       [pattern]="item.pattern"
+                       [required]="item.required"/><i class="sy-icon-sub-del" (click)="clearValue(item.key,$event)">X</i>
+            </div>
+            <div class="weui-cell__ft" (click)="togglePaw(toggleTypeOne,eyeOne)">
+                <i class="sy-icon-eye" #eyeOne></i>
+            </div>
+        </div>
+        <yl-sibling *ngIf="item.sib" [source]="item.sib"></yl-sibling>
+    </ng-container>
+    <!--图片验证码-->
+    <ng-container *ngSwitchCase="'cVerityCode'">
+        <div class="weui-cell" [class.weui-cell-icon]="item.labelicon"
+             [ngClass]="{'hide':form.get(item.key).disabled }">
+            <div class="weui-cell__hd">
+                <label class="weui-label" [ngClass]="item.labelwidth">
+                    <i *ngIf="item.labelicon" [class]="item.labelicon"></i>
+                    <span *ngIf="item.label">{{item.label}}</span>
+                </label>
+            </div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" ylClearvalue type="text" [formControlName]="item.key" [id]="item.key"
+                       [name]="item.key" maxlength="4" placeholder="请输入图形验证码"
+                       [required]="item.required"/><i class="sy-icon-sub-del" (click)="clearValue(item.key,$event)">X</i>
+            </div>
+            <div class="weui-cell__ft">
+                <img class="grap-code-img" [src]="imageInfo.url" (click)="getImage()"/>
+            </div>
+        </div>
+        <yl-sibling *ngIf="item.sib" [source]="item.sib"></yl-sibling>
+    </ng-container>
+    <input type="hidden" *ngSwitchCase="'cImgToken'" [formControlName]="item.key" name="imgToken" id="imgToken"/>
+    <!--短信验证码-->
+    <ng-container *ngSwitchCase="'cPhoneCode'">
+        <div class="weui-cell" [class.weui-cell-icon]="item.labelicon">
+            <div class="weui-cell__hd">
+                <label class="weui-label" [ngClass]="item.labelwidth">
+                    <i *ngIf="item.labelicon" [class]="item.labelicon"></i>
+                    <span *ngIf="item.label">{{item.label}}</span>
+                </label>
+            </div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" ylClearvalue type="text" minlength="4" maxlength="4"
+                       [placeholder]="item.placeholder ? item.placeholder : '请输入手机验证码'"
+                       [formControlName]="item.key" [id]="item.key"
+                       [name]="item.key" [required]="item.required"/><i class="sy-icon-sub-del" (click)="clearValue(item.key,$event)">X</i>
+            </div>
+            <div class="weui-cell__ft">
+                <button type="button" class="weui-btn weui-btn_plain" [disabled]="smsInfo.disabled"
+                        (click)="getSms(item.smsType)" style="padding:0;white-space:nowrap">{{smsInfo.message}}
+                </button>
+            </div>
+        </div>
+        <yl-sibling *ngIf="item.sib" [source]="item.sib"></yl-sibling>
+    </ng-container>
+    <!--提交按钮-->
+    <ng-container *ngSwitchCase="'submit'">
+        <div class="dif wp100 z-index-h" [ngClass]="{'new-btn': item.beforeSib}">
+            <yl-sibling *ngIf="item.beforeSib" class="before-sib-class w60 h50" [source]="item.beforeSib"></yl-sibling>
+            <div class="weui-btn-area flex1 h50">
+                <button type="submit" class="weui-btn weui-btn_primary" [disabled]="!form.valid">{{item.btnText}}</button>
+            </div>
+        </div>
+        <yl-sibling *ngIf="item.sib" [source]="item.sib"></yl-sibling>
+    </ng-container>
+    <!--注册协议-->
+    <label for="serviceAgree" class="weui-agree" [ngClass]="item.myClass === 'bg-green' ? 'als' : 'jct'" *ngSwitchCase="'cServiceAgree'">
+        <input type="checkbox" [formControlName]="item.key" [checked]="item.checked" [id]="item.key" [name]="item.key" [required]="item.required"
+               [value]="item.value" class="weui-agree__checkbox" [ngClass]="item.myClass" [checked]="item.checked"><yl-sibling *ngIf="item.sib" [source]="item.sib"></yl-sibling>
+    </label>
+    <!--select-->
+    <ng-container *ngSwitchCase="'select'">
+        <div class="weui-cell weui-cell_select" style="padding-left:15px">
+            <div class="weui-cell__hd">
+                <label class="weui-label" [ngClass]="item.labelwidth">
+                    <span *ngIf="item.label">{{item.label}}</span>
+                </label>
+            </div>
+            <div class="weui-cell__bd" (touchstart)="clickSelect()">
+                <select #selectNode class="weui-select" style="padding-left:0" [class._placeholder]="item.value===''"
+                    [name]="item.key" [id]="item.key"
+                    [formControlName]="item.key" [required]="item.required" (change)="OnChange($event)">
+                    <option *ngIf="item.placeholder" value="" [selected]="item.checked">{{item.placeholder}}</option>
+                    <option *ngFor="let option of item.options" [value]="option.value">{{option.name}}</option>
+                </select>
+            </div>
+        </div>
+        <yl-sibling *ngIf="item.sib" [source]="item.sib"></yl-sibling>
+    </ng-container>
+    <ng-container *ngSwitchCase="'radio'">
+        <div class="weui-cell">
+            <div class="weui-cell__hd" *ngIf="item.labelicon || item.label">
+                <label class="weui-label" [ngClass]="item.labelwidth">
+                    <span *ngIf="item.label">{{item.label}}</span>
+                </label>
+            </div>
+            <div class="weui-cell__bd">
+                <ng-container *ngFor="let option of item.options;index as i">
+                    <input class="dib vm" [checked]="option.checked" [formControlName]="item.key" id="{{option.name+i}}" [value]="option.value" [name]="option.name" type="radio"/>
+                    <label class="dib vm ml5 mr20" for="{{option.name+i}}">{{option.label}}</label>
+                </ng-container>
+            </div>
+        </div>
+    </ng-container>
+    <!--实时搜索地址-->
+    <ng-container *ngSwitchCase="'ddSearch'">
+        <div class="weui-cell" [class.weui-cell-icon]="item.labelicon">
+            <div class="weui-cell__hd">
+                <label class="weui-label" [ngClass]="item.labelwidth">
+                    <i *ngIf="item.labelicon" [class]="item.labelicon"></i>
+                    <span *ngIf="item.label">{{item.label}}</span>
+                </label>
+            </div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" [type]="item.type" (input)="OnChange($event)" [id]="item.key"
+                       [formControlName]="item.key" [name]="item.key"
+                       [placeholder]="item.placeholder" [minlength]="item.minlength" [maxlength]="item.maxlength"
+                       [pattern]="item.pattern"
+                       [required]="item.required"/>
+            </div>
+            <div class="weui-cell__ft" *ngIf="item.unit">{{item.unit}}</div>
+        </div>
+        <div class="weui-cells searchlist" *ngIf="addrResult">
+            <div class="weui-cell" *ngFor="let addr of addrResult" (click)="selectAddr(addr)">
+                <span class="fl">{{addr.name}},{{addr.district}}区</span><span class="fr">{{ addr.address }}</span>
+            </div>
+            <div class="weui-cell" *ngIf="addrResult.length===0">
+                抱歉：暂未搜索到相关小区
+            </div>
+        </div>
+        <yl-sibling *ngIf="item.sib" [source]="item.sib"></yl-sibling>
+    </ng-container>
+    <ng-container *ngSwitchCase="'html'">
+        <yl-sibling *ngIf="item.sib" [source]="item.sib"></yl-sibling>
+    </ng-container>
+</div>

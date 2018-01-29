@@ -1,0 +1,55 @@
+<!-- 选择转让类型 -->
+<div *ngIf="subdata.type=='transfer'">
+    <div class="can-trans-list">
+        <label class="dix alc" (click)="toTransfer(1)">
+            <div class="flex6 f15"> 普通转让</div>
+            <div class="flex1">
+                <input class="weui-agree__checkbox weui-agree__checkbox-green w20 h20 f20" name="cantrans" type="radio">
+            </div>
+        </label>
+        <label class="dix alc" (click)="toTransfer(2)">
+            <div class="flex6"> 超债转标</div>
+            <div class="flex1">
+                <input class="weui-agree__checkbox weui-agree__checkbox-green w20 h20 f20" name="cantrans" type="radio">
+            </div>
+        </label>
+    </div>
+</div>
+<div *ngIf="subdata.type=='repayment'">
+    <div class="tc t-3c pt10 pb15 f16">{{subdata.data.title}}</div>
+    <yl-sibling class="pt5" *ngIf="subdata.data.intro" [source]="subdata.data.intro"></yl-sibling>
+    <div class="close-it">
+        <button class="wp100 h50 t-ff4b5f f15 border0 bg-fff" (click)="closeDialog()">我知道了</button>
+    </div>
+</div>
+<!--success-->
+<div *ngIf="subdata.type=='playdown'">
+    <div class="abs wp100 h50">
+        <span *ngIf="subdata.data.top_close" class="top-close-wrap" (click)="closeDialog()">
+            <i class="icon-top-close"></i>
+        </span>
+    </div>
+    <div class="popupview-box">
+        <div *ngIf="subdata.data.icon">
+            <i [class]="subdata.data.icon"></i>
+        </div>
+        <div class="pt15 f18 t-333">{{subdata.data.title}}</div>
+        <yl-sibling class="pt5" *ngIf="subdata.data.intro" [source]="subdata.data.intro"></yl-sibling>
+        <button class="weui-btn weui-btn_primary mt40" (click)="jump()">
+            <span *ngIf="subdata.data.countJump">{{subdata.data.countJump}}</span>{{subdata.data.jump}}</button>
+        <div class="t-9c mt10 f15" (click)="guide()" *ngIf="subdata.data.guide">{{subdata.data.guide}}</div>
+    </div>
+</div>
+<div *ngIf="subdata.type=='riskStart'">
+    <div class="abs wp100 h50">
+        <span *ngIf="subdata.data.top_close" class="top-close-wrap" (click)="closeDialog()">
+            <i class="icon-top-close"></i>
+        </span>
+    </div>
+    <div class="popupview-box">
+        <div class="pt15 f18 t-333">{{subdata.data.title}}</div>
+        <button class="weui-btn weui-btn_primary mt40" (click)="subdata.data.jump1_event()">{{subdata.data.jump1}}</button>
+        <span class="weui-btn jump2_btn" (click)="closeDialog()">{{subdata.data.jump2}}</span>
+    </div>
+
+</div>

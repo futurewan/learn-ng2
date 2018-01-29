@@ -1,0 +1,55 @@
+/*客服下标*/
+
+.financeConsul {
+    margin-top: 30px;
+    padding: 25px 10px 10px;
+    border: 1px dashed #fe6246;
+    border-radius: 5px;
+    position: relative;
+    border-top: 0;
+    margin-bottom: 20px
+}
+
+.financeConsul .topbord {
+    position: absolute;
+    top: -10px;
+    left: 0;
+    color: #fe6246;
+    width: 100%;
+}
+
+.financeConsul .topbord .l {
+    border-top: 1px dashed #fe6246;
+    height: 1px;
+}
+
+.financeConsul .topbord .rd {
+    width: 5px;
+    height: 5px;
+    border-radius: 5px;
+    background: #fe6246;
+}
+
+.financeConsul .phone-kf {
+    color: #fe6246;
+    border: 1px solid #fe6246;
+    width: 100%;
+    height: 34px;
+    border-radius: 20px;
+    white-space: nowrap
+}
+
+.financeConsul .bottomchar {
+    position: absolute;
+    bottom: 15px;
+}
+
+
+.customer-service {
+    width: 112px;
+    height: 36px;
+    border: 1px solid #508cee;
+    color: #508cee;
+    border-radius: 18px;
+    margin: 15px auto;
+}

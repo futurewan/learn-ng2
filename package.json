@@ -5,30 +5,37 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "loc": "ng serve --open --host 192.168.1.103 --port 9000",
+    "locw": "ng serve --open --host 172.16.203.87 --port 9000",
     "build": "ng build",
-    "test": "ng test",
+    "build-jr": "ng build --prod --env=jr --aot",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "compodoc": "./node_modules/.bin/compodoc -p src/tsconfig.app.json"
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^4.2.4",
-    "@angular/common": "^4.2.4",
-    "@angular/compiler": "^4.2.4",
-    "@angular/core": "^4.2.4",
-    "@angular/forms": "^4.2.4",
-    "@angular/http": "^4.2.4",
-    "@angular/platform-browser": "^4.2.4",
-    "@angular/platform-browser-dynamic": "^4.2.4",
-    "@angular/router": "^4.2.4",
+    "@angular/animations": "^5.2.1",
+    "@angular/common": "^5.2.1",
+    "@angular/compiler": "^5.2.1",
+    "@angular/core": "^5.2.1",
+    "@angular/forms": "^5.2.1",
+    "@angular/http": "^5.2.1",
+    "@angular/platform-browser": "^5.2.1",
+    "@angular/platform-browser-dynamic": "^5.2.1",
+    "@angular/router": "^5.2.1",
+    "highcharts": "^4.2.7",
+    "moment": "^2.18.0",
     "core-js": "^2.4.1",
     "rxjs": "^5.4.3",
     "zone.js": "^0.8.14"
   },
   "devDependencies": {
-    "@angular/cli": "1.4.6",
-    "@angular/compiler-cli": "^4.2.4",
-    "@angular/language-service": "^4.2.4",
+    "@angular-devkit/core": "0.0.28",
+    "@angular/cli": "1.6.2",
+    "@angular/compiler-cli": "^5.2.1",
+    "@angular/language-service": "^5.2.1",
+    "@compodoc/compodoc": "^1.0.5",
     "@types/jasmine": "~2.5.53",
     "@types/jasminewd2": "~2.0.2",
     "@types/node": "~6.0.60",
@@ -44,6 +51,6 @@
     "protractor": "~5.1.2",
     "ts-node": "~3.2.0",
     "tslint": "~5.7.0",
-    "typescript": "~2.3.3"
+    "typescript": "~2.4.2"
   }
 }

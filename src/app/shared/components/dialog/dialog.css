@@ -1,0 +1,146 @@
+.weui-mask,
+.weui-dialog {
+    -webkit-animation: fadein .25s;
+    /* Safari, Chrome and Opera > 12.1 */
+    -moz-animation: fadein .25s;
+    /* Firefox < 16 */
+    -ms-animation: fadein .25s;
+    /* Internet Explorer */
+    -o-animation: fadein .25s;
+    /* Opera < 12.1 */
+    animation: fadein .25s;
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+
+/* Firefox < 16 */
+
+@-moz-keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+
+/* Safari, Chrome and Opera > 12.1 */
+
+@-webkit-keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+
+/* Internet Explorer */
+
+@-ms-keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+
+/* Opera < 12.1 */
+
+@-o-keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.passwordDiv {
+    height: 75px
+}
+
+.passwordLabel {
+    display: block;
+    height: 65px;
+    text-align: center;
+    overflow: hidden
+}
+
+.passwordLabel ul {
+    overflow: hidden;
+    width: 100%;
+    padding-top: 20px;
+    margin: 0 auto;
+    padding-left: 3px;
+    text-align: center
+}
+
+.passwordLabel li {
+    display: inline-block;
+    width: 38px;
+    height: 38px;
+    line-height: 48px;
+    font-size: 30px;
+    overflow: hidden;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid #dedede;
+    margin-left: -1px;
+}
+
+.passwordDiv input {
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    border: 0;
+    clear: both
+}
+.can-trans-list{
+    color:#4a4a4a;
+    /* height:257px; */
+    padding-left: 15px;
+    padding-right: 15px;
+    overflow: auto;
+}
+.can-trans-list label{
+    height: 70px;
+    position: relative
+}
+.can-trans-list label:after {
+    content: " ";
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    height: 1px;
+    border-top: 1px solid #D5D5D6;
+    color: #D5D5D6;
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+    -webkit-transform: scaleY(0.5);
+    transform: scaleY(0.5);
+}
+.jump2_btn{
+  display: inline;
+  margin-top: 10px;
+  background: none;
+  border: none;
+  outline: none;
+  color: #999;
+}
+.jump2_btn:after{
+  border: none;
+}

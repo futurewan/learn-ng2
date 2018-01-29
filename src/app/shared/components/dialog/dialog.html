@@ -1,0 +1,175 @@
+<div class="js_dialog" [ngSwitch]="configs.type">
+    <div *ngSwitchCase="'default'">
+        <!--默认类型-->
+        <div class="weui-mask" [ngClass]="{'fadein': isShowMask}"></div>
+        <div class="weui-dialog" *ngIf="!configs.source" [ngClass]="{'fadein': isShow}">
+            <div class="weui-dialog__hd rel" *ngIf="configs.top_show === false ? configs.top_show : true">
+                <strong class="weui-dialog__title">{{configs.title}}</strong>
+                <span *ngIf="configs.top_close" class="top-close-wrap" (click)="defaultEvent()">
+                    <i class="icon-top-close"></i>
+                </span>
+            </div>
+            <div class="weui-dialog__bd">
+                <pre class="pb10" *ngIf="configs.body">{{configs.body}}</pre>
+                <yl-sibling *ngIf="configs.body_source" [source]="configs.body_source"></yl-sibling>
+                <yl-dialog-sub-template [subdata]="configs.sub_template" *ngIf="configs.sub_template"></yl-dialog-sub-template>
+            </div>
+            <div class="weui-dialog__ft">
+                <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_default" *ngIf="configs['btn']['default_text']" (click)="defaultEvent()">{{configs.btn.default_text}}</a>
+                <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary" *ngIf="configs['btn']['primary_text']" (click)="primaryEvent()">{{configs.btn.primary_text}}</a>
+            </div>
+        </div>
+        <div class="weui-dialog" *ngIf="configs.source" [ngClass]="{'fadein': isShow}">
+            <yl-sibling [source]="configs.source"></yl-sibling>
+        </div>
+    </div>
+
+    <div *ngSwitchCase="'fullscreen'">
+        <!--全屏类型-->
+        <div class="weui-mask" [ngClass]="{'fadein': isShowMask}"></div>
+        <div class="weui-dialog fullscreen" *ngIf="!configs.source" [ngClass]="{'fadein': isShow}">
+            <div class="weui-dialog__hd">
+                <strong class="weui-dialog__title">{{configs.title}}</strong>
+            </div>
+            <div class="weui-dialog__bd">
+                <pre *ngIf="configs.body">{{configs.body}}</pre>
+                <yl-sibling *ngIf="configs.body_source" [source]="configs.body_source"></yl-sibling>
+            </div>
+            <div class="weui-dialog__ft">
+                <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_default" *ngIf="configs['btn']['default_text']" (click)="defaultEvent()">{{configs.btn.default_text}}</a>
+                <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary" *ngIf="configs['btn']['primary_text']" (click)="primaryEvent()">{{configs.btn.primary_text}}</a>
+            </div>
+        </div>
+        <div class="weui-dialog fullscreen" *ngIf="configs.source" [ngClass]="{'fadein': isShow}">
+            <yl-sibling [source]="configs.source"></yl-sibling>
+        </div>
+    </div>
+
+    <div *ngSwitchCase="'imgviewer'">
+        <!--图片类型-->
+        <div class="weui-mask" [ngClass]="{'fadein': isShowMask}"></div>
+        <div class="weui-gallery">
+            <span class="weui-gallery__img" [style.width]="configs.image.width ? configs.image.width : '100%'">
+                <a href='{{configs.image.redirectUrl}}'>
+                    <img src="{{configs.image.url}}" />
+                </a>
+            </span>
+            <div class="weui-gallery__opr">
+                <a href="javascript:;" *ngIf="configs['btn']['default_text']" (click)="defaultEvent()"></a>
+                <a href="javascript:;" class="sy-icon-close" *ngIf="configs['btn']['primary_text']" (click)="primaryEvent()"></a>
+            </div>
+        </div>
+    </div>
+
+    <div *ngSwitchCase="'popup'">
+        <!--上浮操作类型-->
+        <div class="weui-mask" [ngClass]="{'fadein': isShowMask}"></div>
+        <div class="weui-actionsheet" [ngClass]="{'weui-actionsheet_toggle': isShow}">
+            <div class="weui-dialog__top" *ngIf="configs.title">
+                <strong class="weui-dialog__title">{{configs.title}}</strong>
+                <span *ngIf="configs.top_close" class="top-close-wrap" (click)="defaultEvent()">
+                    <i class="icon-top-close"></i>
+                </span>
+            </div>
+            <!--常规操作下弹框列表-->
+            <div *ngIf="configs.poplist.length">
+                <div class="weui-actionsheet__menu">
+                    <div class="weui-actionsheet__cell" *ngFor="let item of configs.poplist">
+                        <div class="weui-actionsheet-custom" *ngIf="item.echo" (click)="echo(item.echo)">{{item.txt}}</div>
+                        <a class="weui-actionsheet-custom" *ngIf="item.link" [href]="item.href">{{item.txt}}</a>
+                        <a class="weui-actionsheet-custom" *ngIf="item.routerLink" routerLink="/chain" [queryParams]="{'url':item.txtUrl,'title':item.tit}">{{item.txt}}</a>
+                    </div>
+                </div>
+                <div class="weui-actionsheet__action">
+                    <div class="weui-actionsheet__cell" (click)="primaryEvent()">取消</div>
+                </div>
+            </div>
+            <!--自定义模版下弹框-->
+            <div *ngIf="configs.source">
+                <div class="weui-actionsheet__menu">
+                    <yl-sibling [source]="configs.source"></yl-sibling>
+                </div>
+            </div>
+            <!--自定义获取数据模版下弹框-->
+            <div *ngIf="configs.sub_template">
+                <div class="weui-actionsheet__menu">
+                    <yl-dialog-sub-template (closeEvent)="defaultEvent()" (jumpEvent)="jumpEvent()" [subdata]="configs.sub_template"></yl-dialog-sub-template>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngSwitchCase="'paypop'">
+        <!-- 输入密码-->
+        <div class="weui-mask" [ngClass]="{'fadein': isShowMask}"></div>
+        <div class="weui-dialog box-c" [ngClass]="{'fadein': isShow}">
+            <!--<div class="weui-dialog__title pithy border-bottom-default">
+                <i class="icon-top-close" (click)="defaultEvent()"></i>
+                <p class="b">输入交易密码</p>
+            </div>-->
+            <div class="weui-dialog__hd rel">
+                <strong class="weui-dialog__title">输入交易密码</strong>
+                <span class="top-close-wrap" (click)="defaultEvent()">
+                    <i class="icon-top-close"></i>
+                </span>
+            </div>
+            <div>
+                <div class="passwordDiv">
+                    <label for="password" class="passwordLabel">
+                        <ul>
+                            <li #v1></li>
+                            <li #v2></li>
+                            <li #v3></li>
+                            <li #v4></li>
+                            <li #v5></li>
+                            <li #v6></li>
+                        </ul>
+                    </label>
+                    <input type="password" id="password" name="password" (keyup)="showVal($event,v1,v2,v3,v4,v5,v6)" [ylFocus]="true" maxlength="6"
+                    />
+                </div>
+                <p data-event-router="user/setting/reset-trade-psw?withReffer" class="weui-cell_link tr pb10">忘记交易密码？</p>
+            </div>
+        </div>
+    </div>
+
+    <div *ngSwitchCase="'msgpop'">
+        <!--短信验证码-->
+        <div class="weui-mask" [ngClass]="{'fadein': isShowMask}"></div>
+        <div class="weui-dialog box-c" [ngClass]="{'fadein': isShow}">
+            <div class="weui-dialog__title pithy border-bottom-default">
+                <i class="left-arrow" (click)="defaultEvent()"></i>
+                <p>输入短信验证码</p>
+            </div>
+            <!--<div class="weui-dialog__hd tl"><strong class="weui-actionsheet__action t-imp" (click)="defaultEvent()">取消</strong></div>-->
+            <div class="weui-dialog__bd pt20 pb30">
+                <div class="sms-box dix alc border1px radius">
+                    <input class="weui-input" placeholder="短信验证码" type="text" id="phoneCode" name="phoneCode" [ylFocus]="true" (keyup)="phoneCodeUp($event)"
+                        maxlength="4" />
+                    <button class="weui-btn weui-btn_plain border-left-default" disabled (click)="getMsgSms()" [disabled]="smsInfo.disabled"
+                        type="button">{{smsInfo.message}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--toast小提示框-->
+    <div *ngSwitchCase="'warn'">
+        <div class="tc">
+            <div class="weui-mask_transparent">
+                <p class="weui-warn__content">{{configs.body}}</p>
+            </div>
+        </div>
+    </div>
+
+    <div *ngSwitchCase="'loading'">
+        <!--提示加载中-->
+        <div id="loadingToast">
+            <div class="weui-mask_transparent"></div>
+            <div class="weui-toast">
+                <i class="weui-loading weui-icon_toast"></i>
+                <p class="weui-toast__content">请稍候……</p>
+            </div>
+        </div>
+    </div>
+</div>

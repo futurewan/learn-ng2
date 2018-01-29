@@ -1,0 +1,58 @@
+<span [ngSwitch]="type">
+    <div *ngSwitchCase='"loan"' class="box-c">
+        <div class="financeConsul dix">
+            <div class="topbord dix alc">
+                <span class="l flex1"></span>
+                <span class="rd"></span>
+                <span class="ml10 mr10">融资顾问</span>
+                <span class="rd"></span>
+                <span class="l flex1"></span>
+            </div>
+            <div class="flex3">
+                <img src="../../../../assets/images/kf-1.png" alt="微信公众号客服" />
+            </div>
+            <div class="flex5 pl15 t-999 f12">
+                <a href="tel:400-728-5588" class="phone-kf dix alc jct">
+                    <i class="sy-icon-phone-kf"></i>
+                    <span class="f18">&nbsp;400-728-5588</span>
+                </a>
+                <div class="mt5">工作时间 9:00-18:00</div>
+                <div class="bottomchar">
+                    <div>长按左侧图片识别二维码或手动添加SY8COM_2咨询客服</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngSwitchCase='"short"' class="customer-service dix alc jct">
+        <a class="db weui-cell_link" (click)="helpMe()">
+            <i class="icon-kefu-b"></i>
+            <span class="ml5">联系客服</span>
+        </a>
+    </div>
+
+    <div *ngSwitchCase='"short-num"' class="dix alc jct pt10 pb10">
+        <a href="javascript:void(0);" class="weui-cell_link" (click)="helpMe()">
+            <i class="icon-kefu-b"></i>
+            <span class="ml2 t-imp3">联系客服</span>
+        </a>
+    </div>
+
+    <div *ngSwitchCase='"new-short-num"' class="bg-fff dix alc jct pt8 pb5 hp100 z-1">
+        <a href="javascript:void(0);" class="weui-cell_link" (click)="helpMe()">
+            <i class="icon-sy-loan-kefu db"></i>
+            <span class="db hp100 f12 t-666">客服</span>
+        </a>
+    </div>
+    <div *ngSwitchCase='"short-zs"' class="">
+        <a href="javascript:void(0);" class="weui-cell_link" (click)="helpMe()">
+            <span class="db f14 t-3c">专属客服</span>
+        </a>
+    </div>
+
+     <div *ngSwitchCase='"short-img"'>
+        <a href="javascript:void(0);" class="weui-cell_link" (click)="helpMe()"><img  class="service-img" src="../../assets/images/kefu.png" alt=""></a>
+    </div>
+    <a *ngSwitchCase='"text-num"' class="weui-cell_link f12" href="tel:400 728 5588">400 728 5588</a>
+    <a *ngSwitchCase='"text"' href="tel:400-728-5588" class="weui-footer__link">联系客服</a>
+</span>
